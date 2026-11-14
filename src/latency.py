@@ -42,7 +42,6 @@ def measure_latency(
         device=device
     )
 
-    # Warm-up
     with torch.no_grad():
 
         for _ in range(warmup):

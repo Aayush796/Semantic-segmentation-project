@@ -6,9 +6,6 @@ def intersection_over_union(
     targets,
     num_classes
 ):
-    """
-    Calculate IoU for each segmentation class.
-    """
 
     ious = []
 
@@ -41,9 +38,6 @@ def intersection_over_union(
 
 
 def mean_iou(ious):
-    """
-    Calculate mean IoU while ignoring NaN values.
-    """
 
     valid_ious = [
         value for value in ious

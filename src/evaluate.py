@@ -41,14 +41,12 @@ def evaluate_model(model_name):
 
     set_seed(SEED)
 
-    # Load complete dataset
     full_dataset = PetSegmentationDataset(
         root=DATA_ROOT,
         split="trainval",
         image_size=IMAGE_SIZE
     )
 
-    # Same split used during training
     _, val_indices = create_train_val_split(
         len(full_dataset),
         val_ratio=VAL_RATIO,
@@ -69,7 +67,6 @@ def evaluate_model(model_name):
         num_workers=0
     )
 
-    # Create model
     if model_name == "baseline":
         model = UNet(num_classes=NUM_CLASSES)
 
@@ -81,7 +78,6 @@ def evaluate_model(model_name):
             "Unknown model name"
         )
 
-    # Load trained weights
     checkpoint_path = os.path.join(
         CHECKPOINT_DIR,
         f"{model_name}_best.pth"
@@ -121,7 +117,6 @@ def evaluate_model(model_name):
 
             all_ious.append(batch_ious)
 
-    # Average class IoUs across batches
     class_ious = []
 
     for class_id in range(NUM_CLASSES):

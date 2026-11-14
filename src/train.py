@@ -2,7 +2,6 @@ import os
 import sys
 from pathlib import Path
 
-# Add project root to Python path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -98,14 +97,12 @@ def train_model(model_name):
     print(f"Training model: {model_name}")
     print(f"Device: {DEVICE}")
 
-    # Load complete dataset
     full_dataset = PetSegmentationDataset(
         root=DATA_ROOT,
         split="trainval",
         image_size=IMAGE_SIZE
     )
 
-    # Reproducible split
     train_indices, val_indices = create_train_val_split(
         len(full_dataset),
         val_ratio=VAL_RATIO,
@@ -158,14 +155,12 @@ def train_model(model_name):
 
     model = model.to(DEVICE)
 
-    # Same optimizer for both models
     optimizer = torch.optim.Adam(
         model.parameters(),
         lr=LEARNING_RATE,
         weight_decay=0.0
     )
 
-    # Same loss for both models
     criterion = nn.CrossEntropyLoss()
 
     os.makedirs(
@@ -196,7 +191,6 @@ def train_model(model_name):
             f"Val Loss: {val_loss:.4f}"
         )
 
-        # Save best checkpoint
         if val_loss < best_val_loss:
 
             best_val_loss = val_loss

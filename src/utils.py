@@ -19,6 +19,5 @@ def set_seed(seed=42):
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
 
-    # Make CUDA operations as deterministic as practical
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False

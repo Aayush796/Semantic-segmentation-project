@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-# Add project root to Python's import path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -15,11 +14,8 @@ print("Using device:", device)
 
 model = UNetDilated(num_classes=3).to(device)
 
-# One image instead of a batch of two
 x = torch.randn(1, 3, 256, 256).to(device)
 
-# We are only testing the forward pass.
-# Gradients are not needed.
 with torch.no_grad():
     output = model(x)
 

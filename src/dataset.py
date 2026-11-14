@@ -63,15 +63,6 @@ class PetSegmentationDataset(Dataset):
             dtype=torch.long
         )
 
-        # Oxford-IIIT Pet trimap:
-        # 1 = foreground
-        # 2 = background
-        # 3 = boundary
-        #
-        # Convert to:
-        # 0 = background
-        # 1 = pet
-        # 2 = boundary
 
         mask = mask - 1
 
@@ -83,9 +74,6 @@ def create_train_val_split(
     val_ratio=0.2,
     seed=42
 ):
-    """
-    Create a reproducible train/validation split.
-    """
 
     indices = list(range(dataset_size))
 
